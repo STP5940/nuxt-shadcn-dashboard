@@ -50,9 +50,14 @@ export default defineConfig({
     }),
     presetTypography(),
     presetWebFonts({
+      provider: 'google', // 👈 disable fetching
       fonts: {
         sans: 'Chivo',
         mono: 'Chivo Mono',
+      },
+      timeouts: {
+        warning: 9000,
+        failure: 10000,
       },
     }),
     presetAnimations(),
