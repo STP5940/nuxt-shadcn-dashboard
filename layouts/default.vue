@@ -4,9 +4,8 @@
   <SidebarProvider>
     <!-- <LayoutAppSidebar /> -->
     <SidebarInset>
-      
       <!-- เปลี่ยน LayoutNavigationMenu ให้เป็น fixed top -->
-      <div class="fixed top-0 left-0 right-0 z-1000000">
+      <div class="fixed top-0 left-0 right-0 z-50">
         <LayoutNavigationMenu />
       </div>
 

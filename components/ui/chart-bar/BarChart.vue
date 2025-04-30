@@ -65,6 +65,7 @@ const selectorsBar = computed(() => props.type === 'grouped' ? GroupedBar.select
     <ChartLegend v-if="showLegend" v-model:items="legendItems" @legend-item-click="handleLegendItemClick" />
 
     <VisXYContainer
+      class="z-40"
       :data="data"
       :style="{ height: isMounted ? '100%' : 'auto' }"
       :margin="margin"

@@ -46,7 +46,7 @@ const value = ref({
           </template>
         </Button>
       </PopoverTrigger>
-      <PopoverContent class="w-auto p-0" align="end">
+      <PopoverContent class="w-auto p-0 z-40" align="end">
         <RangeCalendar
           v-model="value"
           weekday-format="short"
