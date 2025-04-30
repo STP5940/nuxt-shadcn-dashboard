@@ -10,6 +10,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   LayoutDashboard,
   Album,
@@ -24,6 +25,8 @@ import {
   HelpCircle,
   Menu,
   Table,
+  ChevronDown,
+  ChevronRight,
 } from "lucide-vue-next";
 
 // Nav items data
@@ -93,6 +96,18 @@ const route = useRoute();
 const activeItem = ref(route.path);
 const isMobileMenuOpen = ref(false);
 
+// Track open/closed state for dropdown menus
+const openDropdowns = ref({
+  projects: false,
+  resources: false,
+  settings: false
+});
+
+// Toggle dropdown state
+const toggleDropdown = (section) => {
+  openDropdowns.value[section] = !openDropdowns.value[section];
+};
+
 // Update active item when route changes
 watch(
   () => route.path,
@@ -101,6 +116,15 @@ watch(
     isMobileMenuOpen.value = false; // Close mobile menu on navigation
   }
 );
+
+// Add this function to prevent body scrolling when mobile menu is open
+watch(isMobileMenuOpen, (isOpen) => {
+  if (isOpen) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
+});
 </script>
 
 <template>
@@ -208,6 +232,8 @@ watch(
             </NavigationMenuContent>
           </NavigationMenuItem>
         </NavigationMenuList>
+        <!-- เพิ่ม NavigationMenuViewport และตั้งค่า mt-5 -->
+        <NavigationMenuViewport class="mt-15" />
       </NavigationMenu>
 
       <div class="ml-auto flex items-center gap-2">
@@ -231,59 +257,145 @@ watch(
     >
       <div
         v-if="isMobileMenuOpen"
-        class="md:hidden absolute top-14 left-0 right-0 h-screen bg-background border-b shadow-lg z-10 overflow-y-auto"
+        class="md:hidden fixed top-14 left-0 right-0 bottom-0 bg-background border-b shadow-lg z-10"
       >
-        <div class="px-2 pt-2 pb-3 space-y-1">
-          <!-- Simple items -->
-          <router-link
-            v-for="item in navItems.simple"
-            :key="item.title"
-            :to="item.href"
-            class="flex items-center px-3 py-2 rounded-md text-base font-medium hover:bg-accent hover:text-accent-foreground"
-            :class="item.href === activeItem ? 'bg-accent text-accent-foreground' : ''"
-          >
-            <component :is="item.icon" class="mr-3 h-5 w-5" />
-            {{ item.title }}
-          </router-link>
-
-          <!-- Projects dropdown -->
-          <div class="px-3 py-2">
-            <div class="flex items-center text-base font-medium">
-              <Folder class="mr-3 h-5 w-5" />
-              Projects
-            </div>
-            <div class="mt-2 pl-8 space-y-1">
+        <!-- Use ScrollArea component for better scrolling experience -->
+        <ScrollArea class="h-full w-full">
+          <div class="px-2 pt-2 pb-3 space-y-1">
+            <!-- Mobile menu content wrapper -->
+            <div class="pb-0">
+              <!-- Add padding at the bottom for better scrolling experience -->
+              <!-- Simple items -->
               <router-link
-                v-for="item in navItems.projects"
+                v-for="item in navItems.simple"
                 :key="item.title"
                 :to="item.href"
-                class="block px-3 py-2 rounded-md text-sm hover:bg-accent hover:text-accent-foreground"
+                class="flex items-center px-3 py-2 my-1 rounded-md text-base font-medium hover:bg-accent hover:text-accent-foreground"
+                :class="
+                  item.href === activeItem ? 'bg-accent text-accent-foreground' : ''
+                "
               >
+                <component :is="item.icon" class="mr-3 h-5 w-5" />
                 {{ item.title }}
               </router-link>
-            </div>
-          </div>
 
-          <!-- Resources dropdown -->
-          <div class="px-3 py-2">
-            <div class="flex items-center text-base font-medium">Resources</div>
-            <div class="mt-2 pl-8 space-y-1">
-              <router-link
-                v-for="item in navItems.resources"
-                :key="item.title"
-                :to="item.href"
-                class="block px-3 py-2 rounded-md text-sm hover:bg-accent hover:text-accent-foreground"
-              >
-                {{ item.title }}
-              </router-link>
+              <!-- Projects dropdown -->
+              <div class="px-0 py-2">
+                <button
+                  @click="toggleDropdown('projects')"
+                  class="w-full flex items-center justify-between text-base font-medium px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground"
+                >
+                  <div class="flex items-center">
+                    <Folder class="mr-3 h-5 w-5" />
+                    Projects
+                  </div>
+                  <component
+                    :is="openDropdowns.projects ? ChevronDown : ChevronRight"
+                    class="h-4 w-4 transition-transform"
+                  />
+                </button>
+                <Transition
+                  enter-active-class="transition duration-200 ease-out"
+                  enter-from-class="transform scale-y-95 opacity-0"
+                  enter-to-class="transform scale-y-100 opacity-100"
+                  leave-active-class="transition duration-150 ease-in"
+                  leave-from-class="transform scale-y-100 opacity-100"
+                  leave-to-class="transform scale-y-95 opacity-0"
+                >
+                  <div
+                    v-if="openDropdowns.projects"
+                    class="mt-2 pl-8 space-y-1 origin-top"
+                  >
+                    <router-link
+                      v-for="item in navItems.projects"
+                      :key="item.title"
+                      :to="item.href"
+                      class="block px-3 py-2 rounded-md text-sm hover:bg-accent hover:text-accent-foreground"
+                    >
+                      {{ item.title }}
+                    </router-link>
+                  </div>
+                </Transition>
+              </div>
+
+              <!-- Resources dropdown -->
+              <div class="px-0 py-2">
+                <button
+                  @click="toggleDropdown('resources')"
+                  class="w-full flex items-center justify-between text-base font-medium px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground"
+                >
+                  <div class="flex items-center">
+                    <FileText class="mr-3 h-5 w-5" />
+                    Resources
+                  </div>
+                  <component
+                    :is="openDropdowns.resources ? ChevronDown : ChevronRight"
+                    class="h-4 w-4 transition-transform"
+                  />
+                </button>
+                <Transition
+                  enter-active-class="transition duration-200 ease-out"
+                  enter-from-class="transform scale-y-95 opacity-0"
+                  enter-to-class="transform scale-y-100 opacity-100"
+                  leave-active-class="transition duration-150 ease-in"
+                  leave-from-class="transform scale-y-100 opacity-100"
+                  leave-to-class="transform scale-y-95 opacity-0"
+                >
+                  <div
+                    v-if="openDropdowns.resources"
+                    class="mt-2 pl-8 space-y-1 origin-top"
+                  >
+                    <router-link
+                      v-for="item in navItems.resources"
+                      :key="item.title"
+                      :to="item.href"
+                      class="block px-3 py-2 rounded-md text-sm hover:bg-accent hover:text-accent-foreground"
+                    >
+                      {{ item.title }}
+                    </router-link>
+                  </div>
+                </Transition>
+              </div>
+
+              <div class="px-3 py-2 mt-4 border-t pt-4">
+                <div class="flex items-center text-base font-medium">
+                  <HelpCircle class="mr-3 h-5 w-5" />
+                  Help & Support
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </ScrollArea>
       </div>
     </Transition>
   </nav>
 </template>
 
 <style scoped>
-/* Add any custom styles here */
+/* Make the mobile menu overlay scroll properly */
+@media (max-width: 768px) {
+  body.overflow-hidden {
+    overflow: hidden;
+  }
+}
+
+/* Custom scrollbar styles */
+:deep(.scrollbar) {
+  width: 8px;
+  background-color: transparent;
+}
+
+:deep(.thumb) {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+:deep(.thumb:hover) {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+:deep(.viewport) {
+  width: 100%;
+  height: 100%;
+}
 </style>
