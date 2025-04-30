@@ -232,7 +232,8 @@ watch(isMobileMenuOpen, (isOpen) => {
             </NavigationMenuContent>
           </NavigationMenuItem>
         </NavigationMenuList>
-        <!-- เพิ่ม NavigationMenuViewport และตั้งค่า mt-5 -->
+
+        <!-- เพิ่ม NavigationMenuViewport และตั้งค่า mt-5 กำหนดความห่างของ NavigationMenuContent -->
         <NavigationMenuViewport class="mt-15" />
       </NavigationMenu>
 
