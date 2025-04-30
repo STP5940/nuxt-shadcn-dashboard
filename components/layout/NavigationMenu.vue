@@ -30,6 +30,10 @@ import {
   LogOut
 } from "lucide-vue-next";
 
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
 // Nav items data
 const navItems = {
   simple: [
@@ -109,6 +113,14 @@ const toggleDropdown = (section) => {
   openDropdowns.value[section] = !openDropdowns.value[section];
 };
 
+// MenuItem logout
+const logout = () => {
+  // ทำการลบ token หรือ session
+  // แล้วค่อย redirect ไปหน้า login
+  localStorage.removeItem('token');
+  router.push('/login');
+};
+
 // Update active item when route changes
 watch(
   () => route.path,
@@ -148,12 +160,14 @@ watch(isMobileMenuOpen, (isOpen) => {
 
       <!-- Logo and brand -->
       <div class="mr-4 flex items-center">
-        <img
-          src="https://www.radix-vue.com/logo.svg"
-          alt="YourApp Logo"
-          class="h-8 w-auto"
-        />
-        <span class="font-bold text-xl ml-1"> YourApp </span>
+        <router-link to="/" class="flex items-center">
+          <img
+            src="https://www.radix-vue.com/logo.svg"
+            alt="YourApp Logo"
+            class="h-8 w-auto"
+          />
+          <span class="font-bold text-xl ml-1">YourApp</span>
+        </router-link>
       </div>
 
       <!-- Desktop Navigation (hidden on mobile) -->
@@ -271,7 +285,7 @@ watch(isMobileMenuOpen, (isOpen) => {
               <span>โปรไฟล์</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem class="text-red-600">
+            <DropdownMenuItem class="text-red-600" @click="logout()">
               <LogOut class="mr-2 h-4 w-4" />
               <span>ออกจากระบบ</span>
             </DropdownMenuItem>
