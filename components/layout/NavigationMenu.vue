@@ -23,6 +23,7 @@ import {
   Users,
   HelpCircle,
   Menu,
+  Table,
 } from "lucide-vue-next";
 
 // Nav items data
@@ -37,6 +38,11 @@ const navItems = {
       title: 'Survey Request',
       href: '/surveyrequest',
       icon: Album
+    },
+    {
+      title: 'Datatable',
+      href: '/datatable',
+      icon: Table
     },
   ],
   projects: [
