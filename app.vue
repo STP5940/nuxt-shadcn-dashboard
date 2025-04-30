@@ -62,7 +62,8 @@ const dir = computed(() => (textDirection.value === "rtl" ? "rtl" : "ltr"));
       </NuxtLayout>
 
       <ClientOnly>
-        <AppSettings />
+        <!-- ตั้งค่า template เว็บ -->
+        <!-- <AppSettings /> -->
       </ClientOnly>
     </div>
 

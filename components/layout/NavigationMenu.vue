@@ -27,6 +27,7 @@ import {
   Table,
   ChevronDown,
   ChevronRight,
+  LogOut
 } from "lucide-vue-next";
 
 // Nav items data
@@ -128,10 +129,13 @@ watch(isMobileMenuOpen, (isOpen) => {
 </script>
 
 <template>
+  <!-- lg:hidden ซ้อนตอนขนาด desktop -->
+  <!-- lg:flex แสดงตอนขนาด desktop -->
+  <!-- sm, md, lg, xl, 2xl -->
   <nav class="border-b bg-background sticky top-0 z-20 w-full">
     <div class="flex h-14 items-center px-4 md:px-6">
       <!-- Mobile menu button (hidden on desktop) -->
-      <div class="mr-2 flex md:hidden">
+      <div class="mr-2 flex lg:hidden">
         <Button
           variant="ghost"
           size="icon"
@@ -144,15 +148,25 @@ watch(isMobileMenuOpen, (isOpen) => {
 
       <!-- Logo and brand -->
       <div class="mr-4 flex items-center">
-        <h2 class="text-lg font-semibold">YourApp</h2>
+        <img
+          src="https://www.radix-vue.com/logo.svg"
+          alt="YourApp Logo"
+          class="h-8 w-auto"
+        />
+        <span class="font-bold text-xl ml-1"> YourApp </span>
       </div>
 
       <!-- Desktop Navigation (hidden on mobile) -->
-      <NavigationMenu class="hidden md:flex">
+      <NavigationMenu class="hidden lg:flex">
         <NavigationMenuList>
           <!-- Simple menu items without dropdowns -->
           <NavigationMenuItem v-for="item in navItems.simple" :key="item.title">
-            <router-link :to="item.href" custom v-slot="{ navigate, isActive }">
+            <router-link
+              :to="item.href"
+              custom
+              v-slot="{ navigate, isActive }"
+              :class="item.href === activeItem ? 'bg-accent text-accent-foreground' : ''"
+            >
               <a
                 @click="navigate"
                 :class="[
@@ -232,18 +246,37 @@ watch(isMobileMenuOpen, (isOpen) => {
             </NavigationMenuContent>
           </NavigationMenuItem>
         </NavigationMenuList>
-
-        <!-- เพิ่ม NavigationMenuViewport และตั้งค่า mt-5 กำหนดความห่างของ NavigationMenuContent -->
-        <NavigationMenuViewport class="mt-15" />
       </NavigationMenu>
 
       <div class="ml-auto flex items-center gap-2">
         <Button variant="ghost" size="icon" class="rounded-full">
           <Bell class="h-5 w-5" />
         </Button>
-        <Button variant="ghost" size="icon" class="rounded-full">
-          <User class="h-5 w-5" />
-        </Button>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger as-child>
+            <Button variant="ghost" size="icon" class="rounded-full">
+              <User class="h-5 w-5" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" class="w-56 mt-5">
+            <DropdownMenuLabel>บัญชีของฉัน</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <Settings class="mr-2 h-4 w-4" />
+              <span>ตั้งค่า</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <User class="mr-2 h-4 w-4" />
+              <span>โปรไฟล์</span>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem class="text-red-600">
+              <LogOut class="mr-2 h-4 w-4" />
+              <span>ออกจากระบบ</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </div>
 
@@ -258,7 +291,7 @@ watch(isMobileMenuOpen, (isOpen) => {
     >
       <div
         v-if="isMobileMenuOpen"
-        class="md:hidden fixed top-14 left-0 right-0 bottom-0 bg-background border-b shadow-lg z-10"
+        class="lg:hidden fixed top-14 left-0 right-0 bottom-0 bg-background border-b shadow-lg z-10"
       >
         <!-- Use ScrollArea component for better scrolling experience -->
         <ScrollArea class="h-full w-full">
@@ -374,29 +407,29 @@ watch(isMobileMenuOpen, (isOpen) => {
 
 <style scoped>
 /* Make the mobile menu overlay scroll properly */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   body.overflow-hidden {
     overflow: hidden;
   }
-}
+} */
 
 /* Custom scrollbar styles */
-:deep(.scrollbar) {
+/* :deep(.scrollbar) {
   width: 8px;
   background-color: transparent;
-}
+} */
 
-:deep(.thumb) {
+/* :deep(.thumb) {
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 4px;
-}
+} */
 
-:deep(.thumb:hover) {
+/* :deep(.thumb:hover) {
   background-color: rgba(0, 0, 0, 0.3);
-}
+} */
 
-:deep(.viewport) {
+/* :deep(.viewport) {
   width: 100%;
   height: 100%;
-}
+} */
 </style>

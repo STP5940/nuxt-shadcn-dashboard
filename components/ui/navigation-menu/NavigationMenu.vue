@@ -29,6 +29,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
     :class="cn('relative z-10 flex max-w-max flex-1 items-center justify-center', props.class)"
   >
     <slot />
-    <NavigationMenuViewport />
+    <!-- และตั้งค่า mt-5 กำหนดความห่างของ NavigationMenuContent -->
+    <NavigationMenuViewport class="mt-5" />
   </NavigationMenuRoot>
 </template>
