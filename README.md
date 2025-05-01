@@ -45,3 +45,4 @@ MIT
 
 [nuxt-src]: https://img.shields.io/badge/Built%20With%20Nuxt-18181B?logo=nuxt.js
 [nuxt-href]: https://nuxt.com/
+[icons]: https://lucide.dev/icons/
