@@ -15,6 +15,18 @@ cd my-dashboard-app
 pnpm i # If you don't have pnpm installed, run: npm install -g pnpm
 ```
 
+## Deploy
+
+```bash [Terminal PM2]
+bun run build
+pm2 start .output/server/index.mjs --name nuxtdev
+```
+
+```bash [Terminal]
+bun run generate
+npx serve .output/public
+```
+
 ## Contributing
 
 1. Clone this repository.

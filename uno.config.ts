@@ -50,7 +50,7 @@ export default defineConfig({
     }),
     presetTypography(),
     presetWebFonts({
-      provider: 'google', // 👈 disable fetching set to 'none'
+      provider: 'none', // 👈 disable fetching set to 'none' or 'google'
       fonts: {
         sans: 'Chivo',
         mono: 'Chivo Mono',

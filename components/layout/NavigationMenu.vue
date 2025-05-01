@@ -162,7 +162,7 @@ watch(isMobileMenuOpen, (isOpen) => {
       <div class="mr-4 flex items-center">
         <router-link to="/" class="flex items-center">
           <img
-            src="https://www.radix-vue.com/logo.svg"
+            src="/logo.svg"
             alt="YourApp Logo"
             class="h-8 w-auto"
           />
