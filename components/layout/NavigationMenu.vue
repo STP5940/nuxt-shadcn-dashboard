@@ -177,22 +177,11 @@ watch(isMobileMenuOpen, (isOpen) => {
           <NavigationMenuItem v-for="item in navItems.simple" :key="item.title">
             <router-link
               :to="item.href"
-              custom
-              v-slot="{ navigate, isActive }"
+              class="px-3 py-2 rounded-md text-base font-medium hover:bg-accent hover:text-accent-foreground flex items-center"
               :class="item.href === activeItem ? 'bg-accent text-accent-foreground' : ''"
             >
-              <a
-                @click="navigate"
-                :class="[
-                  navigationMenuTriggerStyle(),
-                  isActive ? 'text-primary' : '',
-                  'cursor-pointer',
-                ]"
-                class="flex items-center"
-              >
-                <component :is="item.icon" class="mr-2 h-4 w-4" />
-                <span>{{ item.title }}</span>
-              </a>
+              <component v-if="item.icon" :is="item.icon" class="mr-2 h-4 w-4" />
+              {{ item.title }}
             </router-link>
           </NavigationMenuItem>
 
@@ -273,7 +262,7 @@ watch(isMobileMenuOpen, (isOpen) => {
               <User class="h-5 w-5" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" class="w-56 mt-5">
+          <DropdownMenuContent align="end" class="mt-5 w-[99vw] sm:w-56">
             <DropdownMenuLabel>บัญชีของฉัน</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
