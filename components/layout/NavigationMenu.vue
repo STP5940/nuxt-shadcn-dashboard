@@ -415,7 +415,8 @@ const navItems = [
 
 <template>
   <nav class="border-b bg-background sticky top-0 z-20 w-full">
-    <div class="flex h-14 items-center px-4 md:px-6">
+    <!-- p-4 lg:p-6 -->
+    <div class="flex h-14 items-center px-1 lg:px-5">
       <!-- Mobile menu button (hidden on desktop) -->
       <div class="mr-2 flex lg:hidden">
         <Button
