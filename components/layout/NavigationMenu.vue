@@ -161,11 +161,7 @@ watch(isMobileMenuOpen, (isOpen) => {
       <!-- Logo and brand -->
       <div class="mr-4 flex items-center">
         <router-link to="/" class="flex items-center">
-          <img
-            src="/logo.svg"
-            alt="YourApp Logo"
-            class="h-8 w-auto"
-          />
+          <img src="/logo.svg" alt="YourApp Logo" class="h-8 w-auto" />
           <span class="font-bold text-xl ml-1">YourApp</span>
         </router-link>
       </div>
@@ -256,10 +252,13 @@ watch(isMobileMenuOpen, (isOpen) => {
           <Bell class="h-5 w-5" />
         </Button>
 
-        <DropdownMenu>
+        <DropdownMenu :modal="false">
           <DropdownMenuTrigger as-child>
             <Button variant="ghost" size="icon" class="rounded-full">
-              <User class="h-5 w-5" />
+              <Avatar>
+                <AvatarImage src="/unovue.jpg" alt="@unovue" />
+                <AvatarFallback>VUE</AvatarFallback>
+              </Avatar>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" class="mt-5 w-[99vw] sm:w-56">
