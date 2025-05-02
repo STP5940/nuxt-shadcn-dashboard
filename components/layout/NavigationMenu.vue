@@ -1,6 +1,6 @@
 <script setup lang="js">
 import { ref, watch } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -27,85 +27,26 @@ import {
   Table,
   ChevronDown,
   ChevronRight,
-  LogOut
+  LogOut,
+  Component,
+  Circle,
+  CircleSmall,
+  Moon,
+  Sun,
 } from "lucide-vue-next";
 
-import { useRouter } from 'vue-router';
-
 const router = useRouter();
-
-// Nav items data
-const navItems = {
-  simple: [
-    {
-      title: "Dashboard",
-      href: "/",
-      icon: LayoutDashboard,
-    },
-    {
-      title: 'Survey Request',
-      href: '/surveyrequest',
-      icon: Album
-    },
-    {
-      title: 'Datatable',
-      href: '/datatable',
-      icon: Table
-    },
-  ],
-  projects: [
-    {
-      title: "All Projects",
-      href: "/",
-      description: "View all your ongoing and completed projects.",
-    },
-    {
-      title: "Create New",
-      href: "/",
-      description: "Start a new project from scratch or from a template.",
-    },
-    {
-      title: "Project Templates",
-      href: "/",
-      description: "Browse and use predefined project templates.",
-    },
-    {
-      title: "Archived",
-      href: "/",
-      description: "Access your previously archived projects.",
-    },
-  ],
-  resources: [
-    {
-      title: "Documentation",
-      href: "/",
-      description: "Comprehensive guides and API references for our platform.",
-      icon: FileText,
-    },
-    {
-      title: "Community",
-      href: "/",
-      description: "Connect with other users and share your experiences.",
-      icon: Users,
-    },
-    {
-      title: "Help Center",
-      href: "/",
-      description: "Get answers to common questions and issues.",
-      icon: HelpCircle,
-    },
-  ],
-};
-
 const route = useRoute();
 const activeItem = ref(route.path);
 const isMobileMenuOpen = ref(false);
+const colorMode = useColorMode()
 
 // Track open/closed state for dropdown menus
 const openDropdowns = ref({
   projects: false,
   resources: false,
-  settings: false
+  settings: false,
+  components: false,
 });
 
 // Toggle dropdown state
@@ -115,11 +56,13 @@ const toggleDropdown = (section) => {
 
 // MenuItem logout
 const logout = () => {
-  // ทำการลบ token หรือ session
-  // แล้วค่อย redirect ไปหน้า login
   localStorage.removeItem('token');
   router.push('/login');
 };
+
+const toggleTheme = () => {
+  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+}
 
 // Update active item when route changes
 watch(
@@ -138,12 +81,339 @@ watch(isMobileMenuOpen, (isOpen) => {
     document.body.style.overflow = '';
   }
 });
+
+// Nav items data
+const navItems = [
+  {
+    items: [
+      /* {
+        title: "Dashboard",
+        icon: LayoutDashboard,
+        link: "/"
+      }, */
+      {
+        title: 'Survey Request',
+        icon: Album,
+        link: '/surveyrequest'
+      },
+      {
+        title: 'Datatable',
+        icon: Table,
+        link: '/datatable'
+      }
+    ]
+  },
+  {
+    title: 'Projects',
+    icon: Folder,
+    children: [
+      {
+        title: 'All Projects',
+        link: '/',
+        description: 'View all your ongoing and completed projects.'
+      },
+      {
+        title: 'Create New',
+        link: '/',
+        description: 'Start a new project from scratch or from a template.'
+      },
+      {
+        title: 'Project Templates',
+        link: '/',
+        description: 'Browse and use predefined project templates.'
+      },
+      {
+        title: 'Archived',
+        link: '/',
+        description: 'Access your previously archived projects.'
+      }
+    ]
+  },
+  {
+    title: 'Resources',
+    icon: FileText,
+    children: [
+      {
+        title: 'Documentation',
+        icon: FileText,
+        link: '/',
+        description: 'Comprehensive guides and API references for our platform.'
+      },
+      {
+        title: 'Community',
+        icon: Users,
+        link: '/',
+        description: 'Connect with other users and share your experiences.'
+      },
+      {
+        title: 'Help Center',
+        icon: HelpCircle,
+        link: '/',
+        description: 'Get answers to common questions and issues.'
+      }
+    ]
+  },
+  {
+    title: 'Components',
+    icon: Component,
+    children: [
+      {
+        title: 'Accordion',
+        icon: CircleSmall,
+        link: '/components/accordion',
+      },
+      {
+        title: 'Alert',
+        icon: CircleSmall,
+        link: '/components/alert',
+      },
+      {
+        title: 'Alert Dialog',
+        icon: CircleSmall,
+        link: '/components/alert-dialog',
+      },
+      {
+        title: 'Aspect Ratio',
+        icon: CircleSmall,
+        link: '/components/aspect-ratio',
+      },
+      {
+        title: 'Avatar',
+        icon: CircleSmall,
+        link: '/components/avatar',
+      },
+      {
+        title: 'Badge',
+        icon: CircleSmall,
+        link: '/components/badge',
+      },
+      {
+        title: 'Breadcrumb',
+        icon: CircleSmall,
+        link: '/components/breadcrumb',
+      },
+      {
+        title: 'Button',
+        icon: CircleSmall,
+        link: '/components/button',
+      },
+      {
+        title: 'Calendar',
+        icon: CircleSmall,
+        link: '/components/calendar',
+      },
+      {
+        title: 'Card',
+        icon: CircleSmall,
+        link: '/components/card',
+      },
+      {
+        title: 'Carousel',
+        icon: CircleSmall,
+        link: '/components/carousel',
+      },
+      {
+        title: 'Checkbox',
+        icon: CircleSmall,
+        link: '/components/checkbox',
+      },
+      {
+        title: 'Collapsible',
+        icon: CircleSmall,
+        link: '/components/collapsible',
+      },
+      {
+        title: 'Combobox',
+        icon: CircleSmall,
+        link: '/components/combobox',
+      },
+      {
+        title: 'Command',
+        icon: CircleSmall,
+        link: '/components/command',
+      },
+      {
+        title: 'Context Menu',
+        icon: CircleSmall,
+        link: '/components/context-menu',
+      },
+      {
+        title: 'Dialog',
+        icon: CircleSmall,
+        link: '/components/dialog',
+      },
+      {
+        title: 'Drawer',
+        icon: CircleSmall,
+        link: '/components/drawer',
+      },
+      {
+        title: 'Dropdown Menu',
+        icon: CircleSmall,
+        link: '/components/dropdown-menu',
+      },
+      {
+        title: 'Form',
+        icon: CircleSmall,
+        link: '/components/form',
+      },
+      {
+        title: 'Hover Card',
+        icon: CircleSmall,
+        link: '/components/hover-card',
+      },
+      {
+        title: 'Input',
+        icon: CircleSmall,
+        link: '/components/input',
+      },
+      {
+        title: 'Label',
+        icon: CircleSmall,
+        link: '/components/label',
+      },
+      {
+        title: 'Menubar',
+        icon: CircleSmall,
+        link: '/components/menubar',
+      },
+      {
+        title: 'Navigation Menu',
+        icon: CircleSmall,
+        link: '/components/navigation-menu',
+      },
+      {
+        title: 'Number Field',
+        icon: CircleSmall,
+        link: '/components/number-field',
+      },
+      {
+        title: 'Pagination',
+        icon: CircleSmall,
+        link: '/components/pagination',
+      },
+      {
+        title: 'PIN Input',
+        icon: CircleSmall,
+        link: '/components/pin-input',
+      },
+      {
+        title: 'Popover',
+        icon: CircleSmall,
+        link: '/components/popover',
+      },
+      {
+        title: 'Progress',
+        icon: CircleSmall,
+        link: '/components/progress',
+      },
+      {
+        title: 'Radio Group',
+        icon: CircleSmall,
+        link: '/components/radio-group',
+      },
+      {
+        title: 'Range Calendar',
+        icon: CircleSmall,
+        link: '/components/range-calendar',
+      },
+      {
+        title: 'Resizable',
+        icon: CircleSmall,
+        link: '/components/resizable',
+      },
+      {
+        title: 'Scroll Area',
+        icon: CircleSmall,
+        link: '/components/scroll-area',
+      },
+      {
+        title: 'Select',
+        icon: CircleSmall,
+        link: '/components/select',
+      },
+      {
+        title: 'Separator',
+        icon: CircleSmall,
+        link: '/components/separator',
+      },
+      {
+        title: 'Sheet',
+        icon: CircleSmall,
+        link: '/components/sheet',
+      },
+      {
+        title: 'Skeleton',
+        icon: CircleSmall,
+        link: '/components/skeleton',
+      },
+      {
+        title: 'Slider',
+        icon: CircleSmall,
+        link: '/components/slider',
+      },
+      {
+        title: 'Sonner',
+        icon: CircleSmall,
+        link: '/components/sonner',
+      },
+      {
+        title: 'Stepper',
+        icon: CircleSmall,
+        link: '/components/stepper',
+        new: true,
+      },
+      {
+        title: 'Switch',
+        icon: CircleSmall,
+        link: '/components/switch',
+      },
+      {
+        title: 'Table',
+        icon: CircleSmall,
+        link: '/components/table',
+      },
+      {
+        title: 'Tabs',
+        icon: CircleSmall,
+        link: '/components/tabs',
+      },
+      {
+        title: 'Tags Input',
+        icon: CircleSmall,
+        link: '/components/tags-input',
+      },
+      {
+        title: 'Textarea',
+        icon: CircleSmall,
+        link: '/components/textarea',
+      },
+      {
+        title: 'Toast',
+        icon: CircleSmall,
+        link: '/components/toast',
+      },
+      {
+        title: 'Toggle',
+        icon: CircleSmall,
+        link: '/components/toggle',
+      },
+      {
+        title: 'Toggle Group',
+        icon: CircleSmall,
+        link: '/components/toggle-group',
+      },
+      {
+        title: 'Tooltip',
+        icon: CircleSmall,
+        link: '/components/tooltip',
+      },
+    ]
+  },
+];
 </script>
 
 <template>
-  <!-- lg:hidden ซ้อนตอนขนาด desktop -->
-  <!-- lg:flex แสดงตอนขนาด desktop -->
-  <!-- sm, md, lg, xl, 2xl -->
   <nav class="border-b bg-background sticky top-0 z-20 w-full">
     <div class="flex h-14 items-center px-4 md:px-6">
       <!-- Mobile menu button (hidden on desktop) -->
@@ -169,85 +439,147 @@ watch(isMobileMenuOpen, (isOpen) => {
       <!-- Desktop Navigation (hidden on mobile) -->
       <NavigationMenu class="hidden lg:flex">
         <NavigationMenuList>
-          <!-- Simple menu items without dropdowns -->
-          <NavigationMenuItem v-for="item in navItems.simple" :key="item.title">
-            <router-link
-              :to="item.href"
-              class="px-3 py-2 rounded-md text-base font-medium hover:bg-accent hover:text-accent-foreground flex items-center"
-              :class="item.href === activeItem ? 'bg-accent text-accent-foreground' : ''"
-            >
-              <component v-if="item.icon" :is="item.icon" class="mr-2 h-4 w-4" />
-              {{ item.title }}
-            </router-link>
-          </NavigationMenuItem>
+          <!-- Simple menu items -->
+          <template v-for="(group, index) in navItems" :key="index">
+            <!-- Items with direct links -->
+            <template v-if="group.items">
+              <NavigationMenuItem v-for="item in group.items" :key="item.title">
+                <router-link
+                  :to="item.link"
+                  class="px-3 py-2 rounded-md text-base font-medium hover:bg-accent hover:text-accent-foreground flex items-center"
+                  :class="
+                    item.link === activeItem ? 'bg-accent text-accent-foreground' : ''
+                  "
+                >
+                  <component :is="item.icon" class="mr-2 h-4 w-4" />
+                  {{ item.title }}
+                </router-link>
+              </NavigationMenuItem>
+            </template>
 
-          <!-- Projects dropdown -->
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>
-              <Folder class="mr-2 h-4 w-4" />
-              Projects
-            </NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
-                <li v-for="item in navItems.projects" :key="item.title">
-                  <router-link :to="item.href" custom v-slot="{ navigate }">
-                    <a
-                      @click="navigate"
-                      class="block select-none space-y-1 rounded-md cursor-pointer p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                    >
-                      <div class="text-sm font-medium leading-none">{{ item.title }}</div>
-                      <p class="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                        {{ item.description }}
-                      </p>
-                    </a>
-                  </router-link>
-                </li>
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
+            <!-- Items with dropdown menus -->
+            <template v-else-if="group.children">
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>
+                  <component :is="group.icon" class="mr-2 h-4 w-4" />
+                  {{ group.title }}
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <!-- Dropdowns Projects -->
+                  <ul
+                    class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2"
+                    v-if="group.title === 'Projects'"
+                  >
+                    <li v-for="item in group.children" :key="item.title">
+                      <router-link :to="item.link" custom v-slot="{ navigate }">
+                        <a
+                          @click="navigate"
+                          class="block select-none space-y-1 rounded-md cursor-pointer p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div class="text-sm font-medium leading-none">
+                            {{ item.title }}
+                          </div>
+                          <p
+                            class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                          >
+                            {{ item.description }}
+                          </p>
+                        </a>
+                      </router-link>
+                    </li>
+                  </ul>
 
-          <!-- Resources dropdown -->
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul class="grid gap-3 p-6 w-[400px] md:w-[500px]">
-                <li class="row-span-3">
-                  <router-link to="/" custom v-slot="{ navigate }">
-                    <a
-                      @click="navigate"
-                      class="flex h-full w-full select-none flex-col justify-end rounded-md cursor-pointer bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                    >
-                      <div class="mb-2 mt-2 text-lg font-medium">Resources Hub</div>
-                      <p class="text-sm leading-tight text-muted-foreground">
-                        Access all the resources and documentation you need to succeed
-                        with our platform.
-                      </p>
-                    </a>
-                  </router-link>
-                </li>
-                <li v-for="item in navItems.resources" :key="item.title">
-                  <router-link :to="item.href" custom v-slot="{ navigate }">
-                    <a
-                      @click="navigate"
-                      class="block select-none space-y-1 rounded-md cursor-pointer p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                    >
-                      <div class="flex items-center text-sm font-medium leading-none">
-                        <component :is="item.icon" class="mr-2 h-4 w-4" />
-                        {{ item.title }}
-                      </div>
-                      <p class="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                        {{ item.description }}
-                      </p>
-                    </a>
-                  </router-link>
-                </li>
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
+                  <!-- Dropdowns Resources -->
+                  <ul
+                    class="grid gap-3 p-6 w-[400px] md:w-[500px]"
+                    v-else-if="group.title === 'Resources'"
+                  >
+                    <li class="row-span-3">
+                      <router-link to="/" custom v-slot="{ navigate }">
+                        <a
+                          @click="navigate"
+                          class="flex h-full w-full select-none flex-col justify-end rounded-md cursor-pointer bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                        >
+                          <div class="mb-2 mt-2 text-lg font-medium">Resources Hub</div>
+                          <p class="text-sm leading-tight text-muted-foreground">
+                            Access all the resources and documentation you need to succeed
+                            with our platform.
+                          </p>
+                        </a>
+                      </router-link>
+                    </li>
+                    <li v-for="item in group.children" :key="item.title">
+                      <router-link :to="item.link" custom v-slot="{ navigate }">
+                        <a
+                          @click="navigate"
+                          class="block select-none space-y-1 rounded-md cursor-pointer p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div class="flex items-center text-sm font-medium leading-none">
+                            <component :is="item.icon" class="mr-2 h-4 w-4" />
+                            {{ item.title }}
+                          </div>
+                          <p
+                            class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                          >
+                            {{ item.description }}
+                          </p>
+                        </a>
+                      </router-link>
+                    </li>
+                  </ul>
+
+                  <!-- Dropdowns Components -->
+                  <ul
+                    class="grid w-[860px] gap-1 p-6 md:grid-cols-4"
+                    v-else-if="group.title === 'Components'"
+                  >
+                    <li v-for="item in group.children" :key="item.title">
+                      <router-link
+                        :to="item.link"
+                        custom
+                        v-slot="{ navigate }"
+                        :class="
+                          item.link === activeItem
+                            ? 'bg-accent text-accent-foreground'
+                            : ''
+                        "
+                      >
+                        <a
+                          @click="navigate"
+                          class="block select-none space-y-1 rounded-md cursor-pointer p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div class="text-sm font-medium leading-none flex items-center">
+                            <component :is="item.icon" class="mr-2 h-4 w-4" />
+                            {{ item.title }}
+                            <span
+                              v-if="item.new"
+                              class="ml-2 rounded-md bg-[#adfa1d] px-1.5 py-0.5 text-xs leading-none text-[#000000] no-underline group-hover:no-underline"
+                            >
+                              New
+                            </span>
+                          </div>
+                        </a>
+                      </router-link>
+                    </li>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </template>
+          </template>
         </NavigationMenuList>
       </NavigationMenu>
 
       <div class="ml-auto flex items-center gap-2">
+        <!-- ปุ่มเปลี่ยนธีม -->
+        <Button variant="ghost" size="icon" class="rounded-full" @click="toggleTheme">
+          <Moon
+            class="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
+          />
+          <Sun
+            class="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
+          />
+        </Button>
+
         <Button variant="ghost" size="icon" class="rounded-full">
           <Bell class="h-5 w-5" />
         </Button>
@@ -301,97 +633,77 @@ watch(isMobileMenuOpen, (isOpen) => {
             <!-- Mobile menu content wrapper -->
             <div class="pb-0">
               <!-- Add padding at the bottom for better scrolling experience -->
-              <!-- Simple items -->
-              <router-link
-                v-for="item in navItems.simple"
-                :key="item.title"
-                :to="item.href"
-                class="flex items-center px-3 py-2 my-1 rounded-md text-base font-medium hover:bg-accent hover:text-accent-foreground"
-                :class="
-                  item.href === activeItem ? 'bg-accent text-accent-foreground' : ''
-                "
-              >
-                <component :is="item.icon" class="mr-3 h-5 w-5" />
-                {{ item.title }}
-              </router-link>
-
-              <!-- Projects dropdown -->
-              <div class="px-0 py-2">
-                <button
-                  @click="toggleDropdown('projects')"
-                  class="w-full flex items-center justify-between text-base font-medium px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground"
-                >
-                  <div class="flex items-center">
-                    <Folder class="mr-3 h-5 w-5" />
-                    Projects
-                  </div>
-                  <component
-                    :is="openDropdowns.projects ? ChevronDown : ChevronRight"
-                    class="h-4 w-4 transition-transform"
-                  />
-                </button>
-                <Transition
-                  enter-active-class="transition duration-200 ease-out"
-                  enter-from-class="transform scale-y-95 opacity-0"
-                  enter-to-class="transform scale-y-100 opacity-100"
-                  leave-active-class="transition duration-150 ease-in"
-                  leave-from-class="transform scale-y-100 opacity-100"
-                  leave-to-class="transform scale-y-95 opacity-0"
-                >
-                  <div
-                    v-if="openDropdowns.projects"
-                    class="mt-2 pl-8 space-y-1 origin-top"
+              <template v-for="(group, index) in navItems" :key="index">
+                <!-- Simple items -->
+                <template v-if="group.items">
+                  <router-link
+                    v-for="item in group.items"
+                    :key="item.title"
+                    :to="item.link"
+                    class="flex items-center px-3 py-2 my-1 rounded-md text-base font-medium hover:bg-accent hover:text-accent-foreground"
+                    :class="
+                      item.link === activeItem ? 'bg-accent text-accent-foreground' : ''
+                    "
                   >
-                    <router-link
-                      v-for="item in navItems.projects"
-                      :key="item.title"
-                      :to="item.href"
-                      class="block px-3 py-2 rounded-md text-sm hover:bg-accent hover:text-accent-foreground"
-                    >
-                      {{ item.title }}
-                    </router-link>
-                  </div>
-                </Transition>
-              </div>
+                    <component :is="item.icon" class="mr-3 h-5 w-5" />
+                    {{ item.title }}
+                  </router-link>
+                </template>
 
-              <!-- Resources dropdown -->
-              <div class="px-0 py-2">
-                <button
-                  @click="toggleDropdown('resources')"
-                  class="w-full flex items-center justify-between text-base font-medium px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground"
-                >
-                  <div class="flex items-center">
-                    <FileText class="mr-3 h-5 w-5" />
-                    Resources
-                  </div>
-                  <component
-                    :is="openDropdowns.resources ? ChevronDown : ChevronRight"
-                    class="h-4 w-4 transition-transform"
-                  />
-                </button>
-                <Transition
-                  enter-active-class="transition duration-200 ease-out"
-                  enter-from-class="transform scale-y-95 opacity-0"
-                  enter-to-class="transform scale-y-100 opacity-100"
-                  leave-active-class="transition duration-150 ease-in"
-                  leave-from-class="transform scale-y-100 opacity-100"
-                  leave-to-class="transform scale-y-95 opacity-0"
-                >
-                  <div
-                    v-if="openDropdowns.resources"
-                    class="mt-2 pl-8 space-y-1 origin-top"
-                  >
-                    <router-link
-                      v-for="item in navItems.resources"
-                      :key="item.title"
-                      :to="item.href"
-                      class="block px-3 py-2 rounded-md text-sm hover:bg-accent hover:text-accent-foreground"
+                <!-- Dropdown items -->
+                <template v-else-if="group.children">
+                  <div class="px-0 py-2">
+                    <button
+                      @click="toggleDropdown(group.title.toLowerCase())"
+                      class="w-full flex items-center justify-between text-base font-medium px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground"
                     >
-                      {{ item.title }}
-                    </router-link>
+                      <div class="flex items-center">
+                        <component :is="group.icon" class="mr-3 h-5 w-5" />
+                        {{ group.title }}
+                      </div>
+                      <component
+                        :is="
+                          openDropdowns[group.title.toLowerCase()]
+                            ? ChevronDown
+                            : ChevronRight
+                        "
+                        class="h-4 w-4 transition-transform"
+                      />
+                    </button>
+                    <Transition
+                      enter-active-class="transition duration-200 ease-out"
+                      enter-from-class="transform scale-y-95 opacity-0"
+                      enter-to-class="transform scale-y-100 opacity-100"
+                      leave-active-class="transition duration-150 ease-in"
+                      leave-from-class="transform scale-y-100 opacity-100"
+                      leave-to-class="transform scale-y-95 opacity-0"
+                    >
+                      <div
+                        v-if="openDropdowns[group.title.toLowerCase()]"
+                        class="mt-2 pl-8 space-y-1 origin-top"
+                      >
+                        <router-link
+                          v-for="item in group.children"
+                          :key="item.title"
+                          :to="item.link"
+                          class="block px-3 py-2 rounded-md text-sm hover:bg-accent hover:text-accent-foreground"
+                          :class="{
+                            'bg-accent text-accent-foreground': item.link === activeItem,
+                          }"
+                        >
+                          {{ item.title }}
+                          <span
+                            v-if="item.new"
+                            class="ml-2 rounded-md bg-[#adfa1d] px-1.5 py-0.5 text-xs leading-none text-[#000000] no-underline group-hover:no-underline"
+                          >
+                            New
+                          </span>
+                        </router-link>
+                      </div>
+                    </Transition>
                   </div>
-                </Transition>
-              </div>
+                </template>
+              </template>
 
               <div class="px-3 py-2 mt-4 border-t pt-4">
                 <div class="flex items-center text-base font-medium">
@@ -408,30 +720,5 @@ watch(isMobileMenuOpen, (isOpen) => {
 </template>
 
 <style scoped>
-/* Make the mobile menu overlay scroll properly */
-/* @media (max-width: 768px) {
-  body.overflow-hidden {
-    overflow: hidden;
-  }
-} */
-
-/* Custom scrollbar styles */
-/* :deep(.scrollbar) {
-  width: 8px;
-  background-color: transparent;
-} */
-
-/* :deep(.thumb) {
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-} */
-
-/* :deep(.thumb:hover) {
-  background-color: rgba(0, 0, 0, 0.3);
-} */
-
-/* :deep(.viewport) {
-  width: 100%;
-  height: 100%;
-} */
+/* Your existing styles here */
 </style>
