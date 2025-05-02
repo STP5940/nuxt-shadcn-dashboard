@@ -38,6 +38,7 @@ npx serve .output/public
 - [Nuxt.js](https://nuxtjs.org/)
 - [Shadcn Vue](https://shadcn-vue.com/)
 - [UnoCSS](https://unocss.com/)
+- [icons](https://lucide.dev/icons/)
 
 ## License
 
@@ -45,4 +46,3 @@ MIT
 
 [nuxt-src]: https://img.shields.io/badge/Built%20With%20Nuxt-18181B?logo=nuxt.js
 [nuxt-href]: https://nuxt.com/
-[icons]: https://lucide.dev/icons/
