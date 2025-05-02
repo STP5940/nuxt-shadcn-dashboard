@@ -109,22 +109,22 @@ const navItems = [
     children: [
       {
         title: 'All Projects',
-        link: '/',
+        link: '/allprojects',
         description: 'View all your ongoing and completed projects.'
       },
       {
         title: 'Create New',
-        link: '/',
+        link: '/createnew',
         description: 'Start a new project from scratch or from a template.'
       },
       {
         title: 'Project Templates',
-        link: '/',
+        link: '/projecttemplates',
         description: 'Browse and use predefined project templates.'
       },
       {
         title: 'Archived',
-        link: '/',
+        link: '/archived',
         description: 'Access your previously archived projects.'
       }
     ]
@@ -136,19 +136,19 @@ const navItems = [
       {
         title: 'Documentation',
         icon: FileText,
-        link: '/',
+        link: '/documentation',
         description: 'Comprehensive guides and API references for our platform.'
       },
       {
         title: 'Community',
         icon: Users,
-        link: '/',
+        link: '/community',
         description: 'Connect with other users and share your experiences.'
       },
       {
         title: 'Help Center',
         icon: HelpCircle,
-        link: '/',
+        link: '/helpcenter',
         description: 'Get answers to common questions and issues.'
       }
     ]
@@ -431,8 +431,8 @@ const navItems = [
       <!-- Logo and brand -->
       <div class="mr-4 flex items-center">
         <router-link to="/" class="flex items-center">
-          <img src="/logo.svg" alt="YourApp Logo" class="h-8 w-auto" />
-          <span class="font-bold text-xl ml-1">YourApp</span>
+          <img src="/logo.svg" alt="MyApp Logo" class="h-8 w-auto" />
+          <span class="font-bold text-xl ml-1">MyApp</span>
         </router-link>
       </div>
 

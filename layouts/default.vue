@@ -10,12 +10,10 @@
       </div>
 
       <!-- เพิ่ม padding-top เพื่อไม่ให้เนื้อหาถูกเมนูทับ -->
-      <div class="pt-14">
+      <div class="min-w-0 w-full flex-1 overflow-x-auto p-4 lg:pl-6 pt-14">
         <!-- ปรับค่าตามความสูงของเมนูของคุณ -->
         <LayoutHeader />
-        <div class="min-w-0 w-full flex-1 overflow-x-auto p-4 lg:p-6">
-          <slot />
-        </div>
+        <slot />
       </div>
 
       <!-- <LayoutHeader />
