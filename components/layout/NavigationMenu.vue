@@ -11,26 +11,17 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { navItems } from '~/constants/navigationmenu'
+
 import {
-  LayoutDashboard,
-  Album,
-  Folder,
-  CheckSquare,
-  BarChart,
   Settings,
   Bell,
   User,
-  FileText,
-  Users,
   HelpCircle,
   Menu,
-  Table,
   ChevronDown,
   ChevronRight,
   LogOut,
-  Component,
-  Circle,
-  CircleSmall,
   Moon,
   Sun,
 } from "lucide-vue-next";
@@ -81,336 +72,6 @@ watch(isMobileMenuOpen, (isOpen) => {
     document.body.style.overflow = '';
   }
 });
-
-// Nav items data
-const navItems = [
-  {
-    items: [
-      /* {
-        title: "Dashboard",
-        icon: LayoutDashboard,
-        link: "/"
-      }, */
-      {
-        title: 'Survey Request',
-        icon: Album,
-        link: '/surveyrequest'
-      },
-      {
-        title: 'Datatable',
-        icon: Table,
-        link: '/datatable'
-      }
-    ]
-  },
-  {
-    title: 'Projects',
-    icon: Folder,
-    children: [
-      {
-        title: 'All Projects',
-        link: '/allprojects',
-        description: 'View all your ongoing and completed projects.'
-      },
-      {
-        title: 'Create New',
-        link: '/createnew',
-        description: 'Start a new project from scratch or from a template.'
-      },
-      {
-        title: 'Project Templates',
-        link: '/projecttemplates',
-        description: 'Browse and use predefined project templates.'
-      },
-      {
-        title: 'Archived',
-        link: '/archived',
-        description: 'Access your previously archived projects.'
-      }
-    ]
-  },
-  {
-    title: 'Resources',
-    icon: FileText,
-    children: [
-      {
-        title: 'Documentation',
-        icon: FileText,
-        link: '/documentation',
-        description: 'Comprehensive guides and API references for our platform.'
-      },
-      {
-        title: 'Community',
-        icon: Users,
-        link: '/community',
-        description: 'Connect with other users and share your experiences.'
-      },
-      {
-        title: 'Help Center',
-        icon: HelpCircle,
-        link: '/helpcenter',
-        description: 'Get answers to common questions and issues.'
-      }
-    ]
-  },
-  {
-    title: 'Components',
-    icon: Component,
-    children: [
-      {
-        title: 'Accordion',
-        icon: CircleSmall,
-        link: '/components/accordion',
-      },
-      {
-        title: 'Alert',
-        icon: CircleSmall,
-        link: '/components/alert',
-      },
-      {
-        title: 'Alert Dialog',
-        icon: CircleSmall,
-        link: '/components/alert-dialog',
-      },
-      {
-        title: 'Aspect Ratio',
-        icon: CircleSmall,
-        link: '/components/aspect-ratio',
-      },
-      {
-        title: 'Avatar',
-        icon: CircleSmall,
-        link: '/components/avatar',
-      },
-      {
-        title: 'Badge',
-        icon: CircleSmall,
-        link: '/components/badge',
-      },
-      {
-        title: 'Breadcrumb',
-        icon: CircleSmall,
-        link: '/components/breadcrumb',
-      },
-      {
-        title: 'Button',
-        icon: CircleSmall,
-        link: '/components/button',
-      },
-      {
-        title: 'Calendar',
-        icon: CircleSmall,
-        link: '/components/calendar',
-      },
-      {
-        title: 'Card',
-        icon: CircleSmall,
-        link: '/components/card',
-      },
-      {
-        title: 'Carousel',
-        icon: CircleSmall,
-        link: '/components/carousel',
-      },
-      {
-        title: 'Checkbox',
-        icon: CircleSmall,
-        link: '/components/checkbox',
-      },
-      {
-        title: 'Collapsible',
-        icon: CircleSmall,
-        link: '/components/collapsible',
-      },
-      {
-        title: 'Combobox',
-        icon: CircleSmall,
-        link: '/components/combobox',
-      },
-      {
-        title: 'Command',
-        icon: CircleSmall,
-        link: '/components/command',
-      },
-      {
-        title: 'Context Menu',
-        icon: CircleSmall,
-        link: '/components/context-menu',
-      },
-      {
-        title: 'Dialog',
-        icon: CircleSmall,
-        link: '/components/dialog',
-      },
-      {
-        title: 'Drawer',
-        icon: CircleSmall,
-        link: '/components/drawer',
-      },
-      {
-        title: 'Dropdown Menu',
-        icon: CircleSmall,
-        link: '/components/dropdown-menu',
-      },
-      {
-        title: 'Form',
-        icon: CircleSmall,
-        link: '/components/form',
-      },
-      {
-        title: 'Hover Card',
-        icon: CircleSmall,
-        link: '/components/hover-card',
-      },
-      {
-        title: 'Input',
-        icon: CircleSmall,
-        link: '/components/input',
-      },
-      {
-        title: 'Label',
-        icon: CircleSmall,
-        link: '/components/label',
-      },
-      {
-        title: 'Menubar',
-        icon: CircleSmall,
-        link: '/components/menubar',
-      },
-      {
-        title: 'Navigation Menu',
-        icon: CircleSmall,
-        link: '/components/navigation-menu',
-      },
-      {
-        title: 'Number Field',
-        icon: CircleSmall,
-        link: '/components/number-field',
-      },
-      {
-        title: 'Pagination',
-        icon: CircleSmall,
-        link: '/components/pagination',
-      },
-      {
-        title: 'PIN Input',
-        icon: CircleSmall,
-        link: '/components/pin-input',
-      },
-      {
-        title: 'Popover',
-        icon: CircleSmall,
-        link: '/components/popover',
-      },
-      {
-        title: 'Progress',
-        icon: CircleSmall,
-        link: '/components/progress',
-      },
-      {
-        title: 'Radio Group',
-        icon: CircleSmall,
-        link: '/components/radio-group',
-      },
-      {
-        title: 'Range Calendar',
-        icon: CircleSmall,
-        link: '/components/range-calendar',
-      },
-      {
-        title: 'Resizable',
-        icon: CircleSmall,
-        link: '/components/resizable',
-      },
-      {
-        title: 'Scroll Area',
-        icon: CircleSmall,
-        link: '/components/scroll-area',
-      },
-      {
-        title: 'Select',
-        icon: CircleSmall,
-        link: '/components/select',
-      },
-      {
-        title: 'Separator',
-        icon: CircleSmall,
-        link: '/components/separator',
-      },
-      {
-        title: 'Sheet',
-        icon: CircleSmall,
-        link: '/components/sheet',
-      },
-      {
-        title: 'Skeleton',
-        icon: CircleSmall,
-        link: '/components/skeleton',
-      },
-      {
-        title: 'Slider',
-        icon: CircleSmall,
-        link: '/components/slider',
-      },
-      {
-        title: 'Sonner',
-        icon: CircleSmall,
-        link: '/components/sonner',
-      },
-      {
-        title: 'Stepper',
-        icon: CircleSmall,
-        link: '/components/stepper',
-        new: true,
-      },
-      {
-        title: 'Switch',
-        icon: CircleSmall,
-        link: '/components/switch',
-      },
-      {
-        title: 'Table',
-        icon: CircleSmall,
-        link: '/components/table',
-      },
-      {
-        title: 'Tabs',
-        icon: CircleSmall,
-        link: '/components/tabs',
-      },
-      {
-        title: 'Tags Input',
-        icon: CircleSmall,
-        link: '/components/tags-input',
-      },
-      {
-        title: 'Textarea',
-        icon: CircleSmall,
-        link: '/components/textarea',
-      },
-      {
-        title: 'Toast',
-        icon: CircleSmall,
-        link: '/components/toast',
-      },
-      {
-        title: 'Toggle',
-        icon: CircleSmall,
-        link: '/components/toggle',
-      },
-      {
-        title: 'Toggle Group',
-        icon: CircleSmall,
-        link: '/components/toggle-group',
-      },
-      {
-        title: 'Tooltip',
-        icon: CircleSmall,
-        link: '/components/tooltip',
-      },
-    ]
-  },
-];
 </script>
 
 <template>
@@ -431,10 +92,10 @@ const navItems = [
 
       <!-- Logo and brand -->
       <div class="mr-4 flex items-center">
-        <router-link to="/" class="flex items-center">
+        <NuxtLink to="/" class="flex items-center">
           <img src="/logo.svg" alt="MyApp Logo" class="h-8 w-auto" />
           <span class="font-bold text-xl ml-1">MyApp</span>
-        </router-link>
+        </NuxtLink>
       </div>
 
       <!-- Desktop Navigation (hidden on mobile) -->
@@ -445,16 +106,16 @@ const navItems = [
             <!-- Items with direct links -->
             <template v-if="group.items">
               <NavigationMenuItem v-for="item in group.items" :key="item.title">
-                <router-link
+                <NuxtLink
                   :to="item.link"
-                  class="px-3 py-2 rounded-md text-base font-medium hover:bg-accent hover:text-accent-foreground flex items-center"
                   :class="
                     item.link === activeItem ? 'bg-accent text-accent-foreground' : ''
                   "
+                  class="px-3 py-2 rounded-md text-base font-medium hover:bg-accent hover:text-accent-foreground flex items-center"
                 >
                   <component :is="item.icon" class="mr-2 h-4 w-4" />
                   {{ item.title }}
-                </router-link>
+                </NuxtLink>
               </NavigationMenuItem>
             </template>
 
@@ -472,7 +133,7 @@ const navItems = [
                     v-if="group.title === 'Projects'"
                   >
                     <li v-for="item in group.children" :key="item.title">
-                      <router-link :to="item.link" custom v-slot="{ navigate }">
+                      <NuxtLink :to="item.link" custom v-slot="{ navigate }">
                         <a
                           @click="navigate"
                           class="block select-none space-y-1 rounded-md cursor-pointer p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
@@ -486,7 +147,7 @@ const navItems = [
                             {{ item.description }}
                           </p>
                         </a>
-                      </router-link>
+                      </NuxtLink>
                     </li>
                   </ul>
 
@@ -496,21 +157,21 @@ const navItems = [
                     v-else-if="group.title === 'Resources'"
                   >
                     <li class="row-span-3">
-                      <router-link to="/" custom v-slot="{ navigate }">
+                      <NuxtLink to="/" custom v-slot="{ navigate }">
                         <a
                           @click="navigate"
                           class="flex h-full w-full select-none flex-col justify-end rounded-md cursor-pointer bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                         >
-                          <div class="mb-2 mt-2 text-lg font-medium">Resources Hub</div>
+                          <div class="mb-2 text-lg font-medium">Resources Hub</div>
                           <p class="text-sm leading-tight text-muted-foreground">
                             Access all the resources and documentation you need to succeed
                             with our platform.
                           </p>
                         </a>
-                      </router-link>
+                      </NuxtLink>
                     </li>
                     <li v-for="item in group.children" :key="item.title">
-                      <router-link :to="item.link" custom v-slot="{ navigate }">
+                      <NuxtLink :to="item.link" custom v-slot="{ navigate }">
                         <a
                           @click="navigate"
                           class="block select-none space-y-1 rounded-md cursor-pointer p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
@@ -525,7 +186,7 @@ const navItems = [
                             {{ item.description }}
                           </p>
                         </a>
-                      </router-link>
+                      </NuxtLink>
                     </li>
                   </ul>
 
@@ -535,7 +196,7 @@ const navItems = [
                     v-else-if="group.title === 'Components'"
                   >
                     <li v-for="item in group.children" :key="item.title">
-                      <router-link
+                      <NuxtLink
                         :to="item.link"
                         custom
                         v-slot="{ navigate }"
@@ -560,7 +221,7 @@ const navItems = [
                             </span>
                           </div>
                         </a>
-                      </router-link>
+                      </NuxtLink>
                     </li>
                   </ul>
                 </NavigationMenuContent>
@@ -588,8 +249,8 @@ const navItems = [
         <DropdownMenu :modal="false">
           <DropdownMenuTrigger as-child>
             <Button variant="ghost" size="icon" class="rounded-full">
-              <Avatar>
-                <AvatarImage src="/unovue.jpg" alt="@unovue" />
+              <Avatar class="border-2 border-gray-200 dark:border-gray-700">
+                <AvatarImage src="/unovue-preview.png" alt="@unovue" />
                 <AvatarFallback>VUE</AvatarFallback>
               </Avatar>
             </Button>
@@ -597,13 +258,17 @@ const navItems = [
           <DropdownMenuContent align="end" class="mt-5 w-[99vw] sm:w-56">
             <DropdownMenuLabel>บัญชีของฉัน</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Settings class="mr-2 h-4 w-4" />
-              <span>ตั้งค่า</span>
+            <DropdownMenuItem asChild>
+              <NuxtLink to="/settings/profile" class="flex items-center">
+                <Settings class="mr-2 h-4 w-4" />
+                <span>ตั้งค่า</span>
+              </NuxtLink>
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              <User class="mr-2 h-4 w-4" />
-              <span>โปรไฟล์</span>
+            <DropdownMenuItem asChild>
+              <NuxtLink to="/settings/profile" class="flex items-center">
+                <User class="mr-2 h-4 w-4" />
+                <span>โปรไฟล์</span>
+              </NuxtLink>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem class="text-red-600" @click="logout()">
@@ -637,7 +302,7 @@ const navItems = [
               <template v-for="(group, index) in navItems" :key="index">
                 <!-- Simple items -->
                 <template v-if="group.items">
-                  <router-link
+                  <NuxtLink
                     v-for="item in group.items"
                     :key="item.title"
                     :to="item.link"
@@ -648,7 +313,7 @@ const navItems = [
                   >
                     <component :is="item.icon" class="mr-3 h-5 w-5" />
                     {{ item.title }}
-                  </router-link>
+                  </NuxtLink>
                 </template>
 
                 <!-- Dropdown items -->
@@ -683,7 +348,7 @@ const navItems = [
                         v-if="openDropdowns[group.title.toLowerCase()]"
                         class="mt-2 pl-8 space-y-1 origin-top"
                       >
-                        <router-link
+                        <NuxtLink
                           v-for="item in group.children"
                           :key="item.title"
                           :to="item.link"
@@ -699,7 +364,7 @@ const navItems = [
                           >
                             New
                           </span>
-                        </router-link>
+                        </NuxtLink>
                       </div>
                     </Transition>
                   </div>
