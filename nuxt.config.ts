@@ -17,6 +17,7 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
+    '@nuxtjs/i18n',
   ],
 
   css: [
@@ -47,6 +48,31 @@ export default defineNuxtConfig({
     dirs: [
       './lib',
     ],
+  },
+
+  i18n: {
+    // ตั้งค่าพื้นฐาน
+    locales: [
+      {
+        code: 'en',
+        name: 'ENGLISH',
+        file: 'en.json'
+      },
+      {
+        code: 'th',
+        name: 'ภาษาไทย',
+        file: 'th.json'
+      }
+    ],
+    lazy: true,
+    langDir: 'locales',
+    defaultLocale: 'th',
+    strategy: 'no_prefix', // หรือ 'prefix', 'prefix_and_default', 'no_prefix', 'prefix_except_default'
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root'
+    }
   },
 
   compatibilityDate: '2024-12-14',

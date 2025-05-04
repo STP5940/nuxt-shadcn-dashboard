@@ -1,4 +1,6 @@
 <script setup lang="js">
+const { locales, setLocale } = useI18n();
+
 import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import {
@@ -24,6 +26,7 @@ import {
   LogOut,
   Moon,
   Sun,
+  Globe,
 } from "lucide-vue-next";
 
 const router = useRouter();
@@ -232,6 +235,12 @@ watch(isMobileMenuOpen, (isOpen) => {
       </NavigationMenu>
 
       <div class="ml-auto flex items-center gap-2">
+        <!-- ปุ่มแจ้งเตือน -->
+        <!-- ซ้อนถ้าหน้าจอมือถือ -->
+        <Button variant="ghost" size="icon" class="hidden lg:flex rounded-full">
+          <Bell class="h-5 w-5" />
+        </Button>
+
         <!-- ปุ่มเปลี่ยนธีม -->
         <Button variant="ghost" size="icon" class="rounded-full" @click="toggleTheme">
           <Moon
@@ -242,14 +251,44 @@ watch(isMobileMenuOpen, (isOpen) => {
           />
         </Button>
 
-        <Button variant="ghost" size="icon" class="rounded-full">
-          <Bell class="h-5 w-5" />
-        </Button>
+        <!-- Dropdown เปลี่ยนภาษา -->
+        <DropdownMenu :modal="false">
+          <DropdownMenuTrigger as-child>
+            <!-- gap-1 -->
+            <Button variant="ghost" class="rounded-full gap-2">
+              <Globe class="h-5 w-5" />
+              <span class="hidden sm:inline">
+                {{ locales.find((l) => l.code === $i18n.locale)?.name || $t("language") }}
+              </span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" class="mt-5 w-[99vw] sm:w-56">
+            <DropdownMenuLabel>{{ $t("selectLanguage") }}</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              v-for="locale in locales"
+              :key="locale.code"
+              @click="setLocale(locale.code)"
+              :class="{
+                'bg-accent text-accent-foreground': locale.code === $i18n.locale,
+              }"
+            >
+              <span class="flex items-center gap-2">
+                <Avatar class="h-5 w-5 border-1 border-gray-200 dark:border-gray-700">
+                  <AvatarImage :src="`/${locale.code}.svg`" :alt="locale.name" />
+                  <AvatarFallback>{{ locale.code }}</AvatarFallback>
+                </Avatar>
+                {{ locale.name }}
+              </span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
 
+        <!-- Dropdown ผู้ใช้ -->
         <DropdownMenu :modal="false">
           <DropdownMenuTrigger as-child>
             <Button variant="ghost" size="icon" class="rounded-full">
-              <Avatar class="border-2 border-gray-200 dark:border-gray-700">
+              <Avatar class="border-1 border-gray-200 dark:border-gray-700">
                 <AvatarImage src="/unovue-preview.png" alt="@unovue" />
                 <AvatarFallback>VUE</AvatarFallback>
               </Avatar>
