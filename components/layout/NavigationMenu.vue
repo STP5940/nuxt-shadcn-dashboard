@@ -1,7 +1,7 @@
 <script setup lang="js">
 const { locales, setLocale } = useI18n();
 const auth = useAuthStore();
-const config = useRuntimeConfig()
+const config = useRuntimeConfig();
 
 import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";

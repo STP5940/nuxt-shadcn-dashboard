@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const route = useRoute()
-const config = useRuntimeConfig()
+const config = useRuntimeConfig();
 
 function setLinks() {
   if (route.fullPath === '/') {
