@@ -1,6 +1,7 @@
 <script setup lang="js">
 const { locales, setLocale } = useI18n();
 const auth = useAuthStore();
+const config = useRuntimeConfig()
 
 import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
@@ -97,8 +98,12 @@ watch(isMobileMenuOpen, (isOpen) => {
       <!-- Logo and brand -->
       <div class="mr-4 flex items-center">
         <NuxtLink to="/" class="flex items-center">
-          <img src="/logo.svg" alt="MyApp Logo" class="h-8 w-auto" />
-          <span class="font-bold text-xl ml-1">MyApp</span>
+          <img
+            src="/logo.svg"
+            :alt="`${config.public.appName} Logo`"
+            class="h-8 w-auto"
+          />
+          <span class="font-bold text-xl ml-1">{{ config.public.appName }}</span>
         </NuxtLink>
       </div>
 

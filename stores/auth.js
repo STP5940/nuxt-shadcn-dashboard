@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
-// นำเข้า cookiesStorage จาก plugin ที่เราสร้าง
-import { cookiesStorage } from '~/plugins/pinia-cookies-persist'
+import { cookiesStorage } from '~/plugins/pinia-cookies-persist' // นำเข้า cookiesStorage จาก plugin ที่เราสร้าง
+
+const config = useRuntimeConfig();
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -62,6 +63,11 @@ export const useAuthStore = defineStore('auth', {
     },
 
     async initialize() {
+      console.log('env: ', config.public.env);
+      console.log('appName: ', config.public.appName);
+      console.log('companyName: ', config.public.companyName);
+      console.log('apiUrl: ', config.public.apiUrl);
+
       const token = useCookie('auth-store').value
       if (!token) return
       // console.log("token: ", token);
@@ -76,7 +82,7 @@ export const useAuthStore = defineStore('auth', {
   persist: {
     storage: cookiesStorage({
       sameSite: 'strict',
-      secure: process.env.NODE_ENV === 'production',
+      secure: config.public.env === 'production',
       maxAge: 60 * 60 * 24 * 7 // 7 วัน
     }),
     key: 'auth-store',

@@ -3,8 +3,23 @@ export default defineNuxtConfig({
   ssr: false,
   devServer: {
     host: '0.0.0.0',
-    port: 3000, // เปลี่ยนพอร์ตตามต้องการ
+    port: process.env.PORT ? parseInt(process.env.PORT) : 3000, // เปลี่ยนพอร์ตตามต้องการ
     https: false // หรือ true ถ้าต้องการ HTTPS
+  },
+
+  runtimeConfig: {
+    public: {
+      env: process.env.NUXT_PUBLIC_ENV || '',
+      apiUrl: process.env.NUXT_PUBLIC_API_URL || '',
+      appName: process.env.APP_NAME || 'MyApp',
+      companyName: process.env.COMPANY_NAME || 'COMPANY',
+    }
+  },
+
+  nitro: {
+    devProxy: {
+      host: 'localhost',
+    },
   },
 
   devtools: { enabled: true },
@@ -19,10 +34,6 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxtjs/i18n',
   ],
-
-  // plugins: [
-  //   '~/plugins/pinia-cookies-persist'
-  // ],
 
   css: [
     '@unocss/reset/tailwind.css',
