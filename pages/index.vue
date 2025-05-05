@@ -1,4 +1,16 @@
-<script setup lang="ts">
+<script setup lang="js">
+const auth = useAuthStore();
+
+definePageMeta({
+  middleware: ["auth"],
+  layout: "default",
+});
+
+console.log("isLoggedIn: ", auth?.isLoggedIn);
+console.log("accessToken: ", auth?.accessToken);
+console.log("refreshToken: ", auth?.refreshToken);
+console.log("user: ", auth?.user);
+
 import NumberFlow from "@number-flow/vue";
 import { Activity, CreditCard, DollarSign, Users } from "lucide-vue-next";
 

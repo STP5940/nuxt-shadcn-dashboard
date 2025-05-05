@@ -1,24 +1,31 @@
-<script setup lang="ts">
-import { Loader2 } from 'lucide-vue-next'
-import PasswordInput from '~/components/PasswordInput.vue'
+<script setup lang="js">
+const auth = useAuthStore();
 
-const email = ref('demo@gmail.com')
-const password = ref('password')
-const isLoading = ref(false)
+import { Loader2 } from "lucide-vue-next";
+import PasswordInput from "~/components/PasswordInput.vue";
 
-function onSubmit(event: Event) {
-  event.preventDefault()
-  if (!email.value || !password.value)
-    return
+const email = ref("demo@gmail.com");
+const password = ref("password");
+const isLoading = ref(false);
 
-  isLoading.value = true
+function onSubmit(event) {
+  event.preventDefault();
+  if (!email.value || !password.value) return;
+
+  isLoading.value = true;
 
   setTimeout(() => {
-    if (email.value === 'demo@gmail.com' && password.value === 'password')
-      navigateTo('/')
+    if (email.value === "demo@gmail.com" && password.value === "password") {
+      navigateTo("/");
 
-    isLoading.value = false
-  }, 3000)
+      auth.login({
+        email: email.value,
+        password: password.value,
+      });
+    }
+
+    isLoading.value = false;
+  }, 3000);
 }
 </script>
 
@@ -46,9 +53,7 @@ function onSubmit(event: Event) {
     </div>
     <Separator label="Or continue with" />
     <div class="grid gap-2">
-      <Label for="email">
-        Email
-      </Label>
+      <Label for="email"> Email </Label>
       <Input
         id="email"
         v-model="email"
@@ -62,13 +67,8 @@ function onSubmit(event: Event) {
     </div>
     <div class="grid gap-2">
       <div class="flex items-center">
-        <Label for="password">
-          Password
-        </Label>
-        <NuxtLink
-          to="/forgot-password"
-          class="ml-auto inline-block text-sm underline"
-        >
+        <Label for="password"> Password </Label>
+        <NuxtLink to="/forgot-password" class="ml-auto inline-block text-sm underline">
           Forgot your password?
         </NuxtLink>
       </div>
@@ -81,12 +81,8 @@ function onSubmit(event: Event) {
   </form>
   <div class="mt-4 text-center text-sm text-muted-foreground">
     Don't have an account?
-    <NuxtLink to="/register" class="underline">
-      Sign up
-    </NuxtLink>
+    <NuxtLink to="/register" class="underline"> Sign up </NuxtLink>
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

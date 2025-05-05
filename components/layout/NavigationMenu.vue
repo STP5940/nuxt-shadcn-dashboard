@@ -1,5 +1,6 @@
 <script setup lang="js">
 const { locales, setLocale } = useI18n();
+const auth = useAuthStore();
 
 import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
@@ -50,7 +51,7 @@ const toggleDropdown = (section) => {
 
 // MenuItem logout
 const logout = () => {
-  localStorage.removeItem('token');
+  auth.logout()
   router.push('/login');
 };
 

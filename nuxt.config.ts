@@ -20,6 +20,10 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
   ],
 
+  // plugins: [
+  //   '~/plugins/pinia-cookies-persist'
+  // ],
+
   css: [
     '@unocss/reset/tailwind.css',
   ],
@@ -55,7 +59,7 @@ export default defineNuxtConfig({
     locales: [
       {
         code: 'en',
-        name: 'ENGLISH',
+        name: 'English',
         file: 'en.json'
       },
       {

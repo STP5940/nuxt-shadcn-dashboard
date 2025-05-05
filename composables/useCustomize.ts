@@ -12,7 +12,7 @@ export function useCustomize() {
   const config = useCookie<Config>('config', {
     default: () => ({
       theme: 'zinc',
-      radius: 0.25,
+      radius: 0.50,
     }),
   })
 
