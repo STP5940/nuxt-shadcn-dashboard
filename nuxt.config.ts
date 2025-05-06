@@ -16,12 +16,6 @@ export default defineNuxtConfig({
     }
   },
 
-  nitro: {
-    devProxy: {
-      host: 'localhost',
-    },
-  },
-
   devtools: { enabled: true },
 
   modules: [

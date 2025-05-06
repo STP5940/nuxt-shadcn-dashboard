@@ -278,6 +278,7 @@ watch(isMobileMenuOpen, (isOpen) => {
               :class="{
                 'bg-accent text-accent-foreground': locale.code === $i18n.locale,
               }"
+              class="mt-1"
             >
               <span class="flex items-center gap-2">
                 <Avatar class="h-5 w-5 border-1 border-gray-200 dark:border-gray-700">
@@ -304,7 +305,7 @@ watch(isMobileMenuOpen, (isOpen) => {
             <DropdownMenuLabel>บัญชีของฉัน</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <NuxtLink to="/settings/profile" class="flex items-center">
+              <NuxtLink to="/settings/account" class="flex items-center">
                 <Settings class="mr-2 h-4 w-4" />
                 <span>ตั้งค่า</span>
               </NuxtLink>
